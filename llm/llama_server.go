@@ -412,6 +412,25 @@ func startLlamaServer(launch llamaServerLaunchConfig, out io.Writer) (cmd *exec.
 	}
 	// NumGPU == -1 (default): don't pass -ngl, let llama-server auto-detect
 
+	// Dense FFN CPU offload — only pass if explicitly set.
+	if launch.opts.NumCPUFFN != nil {
+		params = append(params, "--n-cpu-ffn", strconv.Itoa(*launch.opts.NumCPUFFN))
+	}
+
+	// Explicit multi-GPU tensor split — only pass if specified.
+	if launch.opts.TensorSplit != "" {
+		params = append(params, "--tensor-split", launch.opts.TensorSplit)
+	}
+
+	// KV cache placement — only pass if explicitly set.
+	if launch.opts.KVOffload != nil {
+		if *launch.opts.KVOffload {
+			params = append(params, "--kv-offload")
+		} else {
+			params = append(params, "--no-kv-offload")
+		}
+	}
+
 	// Thread count — only pass if user explicitly set it.
 	// Default behavior: let llama-server auto-detect.
 	if launch.opts.NumThread > 0 {
