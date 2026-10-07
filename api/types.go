@@ -586,13 +586,16 @@ type Options struct {
 
 // Runner options which must be set when the model is loaded into memory
 type Runner struct {
-	NumCtx          int   `json:"num_ctx,omitempty"`
-	NumBatch        int   `json:"num_batch,omitempty"`
-	NumGPU          int   `json:"num_gpu,omitempty"`
-	MainGPU         *int  `json:"main_gpu,omitempty"`
-	UseMMap         *bool `json:"use_mmap,omitempty"`
-	NumThread       int   `json:"num_thread,omitempty"`
-	DraftNumPredict int   `json:"draft_num_predict,omitempty"`
+	NumCtx          int    `json:"num_ctx,omitempty"`
+	NumBatch        int    `json:"num_batch,omitempty"`
+	NumGPU          int    `json:"num_gpu,omitempty"`
+	NumCPUFFN       *int   `json:"n_cpu_ffn,omitempty"`
+	TensorSplit     string `json:"tensor_split,omitempty"`
+	KVOffload       *bool  `json:"kv_offload,omitempty"`
+	MainGPU         *int   `json:"main_gpu,omitempty"`
+	UseMMap         *bool  `json:"use_mmap,omitempty"`
+	NumThread       int    `json:"num_thread,omitempty"`
+	DraftNumPredict int    `json:"draft_num_predict,omitempty"`
 }
 
 // EmbedRequest is the request passed to [Client.Embed].
