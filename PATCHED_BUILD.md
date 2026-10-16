@@ -1,7 +1,6 @@
-cat > PATCHED_BUILD.md <<'EOF'
-# Patched Ollama v0.40.4
+# Patched Ollama v0.40.5
 
-Upstream base: ollama/ollama v0.40.4
+Upstream base: ollama/ollama v0.40.5
 
 Original local patch: 80cb827f
 
@@ -21,7 +20,7 @@ Changing runner options can trigger a model reload.
 
 Go 1.26.0 or newer.
 
-The official Ollama v0.40.4 native runtime must be
+The official Ollama v0.40.5 native runtime must be
 installed separately. The Go build does not replace
 llama-server or its GPU backend libraries.
 
@@ -32,7 +31,7 @@ llama-server or its GPU backend libraries.
 ## Build
 
     go build -trimpath \
-      -ldflags="-X=github.com/ollama/ollama/version.Version=0.40.4 -X=github.com/ollama/ollama/server.mode=release" \
+      -ldflags="-X=github.com/ollama/ollama/version.Version=0.40.5 -X=github.com/ollama/ollama/server.mode=release" \
       -o ollama-ncpu-ffn .
 
 ## Install
@@ -52,4 +51,3 @@ release tag. Cherry-pick the local patch, resolve any
 conflicts, run tests, then build.
 
 Preserve previous release branches for rollback.
-EOF
